@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<QCARConfig xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="qcar_config.xsd">
+  <Tracking>
+    <ImageTarget name="hacha" size="12.000000 12.000000" />
+    <ImageTarget name="varita" size="12.000000 10.363636" />
+    <ImageTarget name="escudo" size="12.000000 13.281553" />
+    <ImageTarget name="arco" size="12.000000 11.898305" />
+    <ImageTarget name="casco" size="12.000000 13.980582" />
+  </Tracking>
+</QCARConfig>
