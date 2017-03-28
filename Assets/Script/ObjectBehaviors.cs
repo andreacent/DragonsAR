@@ -16,27 +16,26 @@ public class ObjectBehaviors : MonoBehaviour,ITrackableEventHandler {
     }
      
     public void OnTrackableStateChanged(TrackableBehaviour.Status previousStatus,
-                                        TrackableBehaviour.Status newStatus)
-    {
+                                        TrackableBehaviour.Status newStatus){
+
+		if (null == DragonsController.Instance)  return;
+		if (DragonsController.Instance.gameOver)  return;
+
         if (newStatus == TrackableBehaviour.Status.DETECTED ||
             newStatus == TrackableBehaviour.Status.TRACKED ||
             newStatus == TrackableBehaviour.Status.EXTENDED_TRACKED){
             knightAttr.SetActive(true);
             
-            if (null == DragonsController.Instance)  return;
-
             if(isSol) DragonsController.Instance.win = true;
             else StartCoroutine("DesactiveAttr"); 
         }
-        else{
-            knightAttr.SetActive(false);
-        }
+        else knightAttr.SetActive(false);
     }   
 
-    IEnumerator DesactiveAttr() {
+	IEnumerator DesactiveAttr() {
+		ErrorManager.error++;
         yield return new WaitForSeconds(1);
         knightAttr.SetActive(false);
-        ErrorManager.error++;
     }
 }
 

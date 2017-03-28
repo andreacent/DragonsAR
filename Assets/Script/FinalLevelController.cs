@@ -1,15 +1,17 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using Vuforia;
+using System.Linq;
 
 public class FinalLevelController: MonoBehaviour {
 	public static FinalLevelController Instance { get; private set; }
 
-	public bool win = false;
 	public Text textGame;
+	public string[] badTargetNames;
+	public bool gameOver = false;
+	public GameObject canvasBtn;
 	private GameObject player;
 	private GameObject dragon;
 
@@ -25,21 +27,47 @@ public class FinalLevelController: MonoBehaviour {
 	void Start (){
 		player = GameObject.FindWithTag("Player");
 		dragon = GameObject.FindWithTag("Dragon");
+		canvasBtn.SetActive (false);
 	}         
 
 	// Update is called once per frame
 	void Update () {
-		if(ErrorManager.error > 2) StartCoroutine("LoseSecene"); 
-		else if(win) StartCoroutine("WinScene"); 
+		if (gameOver) return;
+
+		if (ErrorManager.error > 2) StartCoroutine ("LoseSecene");
+		else {
+			// Get the Vuforia StateManager
+			StateManager sm = TrackerManager.Instance.GetStateManager ();
+			// Query the StateManager to retrieve the list of
+			// currently 'active' trackables 
+			//(i.e. the ones currently being tracked by Vuforia)
+			IEnumerable<TrackableBehaviour> activeTrackables = sm.GetActiveTrackableBehaviours ();
+
+			// Iterate through the list of active trackables
+			bool win = true;
+			int numActiveTrackables = 0;
+			foreach (TrackableBehaviour tb in activeTrackables) {
+				Debug.Log ("Trackable: " + tb.TrackableName);
+				if (badTargetNames.Contains (tb.TrackableName)) {
+					win = false;
+					break;
+				}
+				numActiveTrackables++;
+			}
+
+			if (numActiveTrackables > 3 && win) StartCoroutine ("WinScene"); 
+		}
 	}
 
 	IEnumerator WinScene() {
-		textGame.text = "Muy Bien!!!";
+		textGame.text = "Ganaste!!";
 		player.GetComponent<Animator>().Play("Taunt");
 		yield return new WaitForSeconds(2);
 		dragon.GetComponent<Animator>().Play("dead");
 		yield return new WaitForSeconds(1);
 		player.GetComponent<Animator>().Play("win");
+		yield return new WaitForSeconds(3);
+		GameOver();
 	}
 
 	IEnumerator LoseSecene() {
@@ -47,5 +75,12 @@ public class FinalLevelController: MonoBehaviour {
 		dragon.GetComponent<Animator>().Play("attack");
 		yield return new WaitForSeconds(1);
 		player.GetComponent<Animator>().Play("died");
+		yield return new WaitForSeconds(3);
+		GameOver();
+	}
+		
+	void GameOver() {
+		gameOver = true;
+		canvasBtn.SetActive (true);
 	}
 }
