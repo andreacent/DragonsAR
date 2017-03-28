@@ -1,15 +1,17 @@
-﻿using UnityEngine;
-using Vuforia;
+﻿using System.Collections;
 using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
-using System.Collections;
+using Vuforia;
 
 public class DragonsController : MonoBehaviour {
     public static DragonsController Instance { get; private set; }
 
     public bool win = false;
     public Text textGame;
-    private Animator player_animator;
+    public string nextSceneName;
+    private GameObject player;
 
     void Awake() {
         textGame.text = "";
@@ -22,18 +24,22 @@ public class DragonsController : MonoBehaviour {
     }
 
     void Start (){
-        player_animator = GameObject.FindWithTag("Player").GetComponent<Animator>();
+        player = GameObject.FindWithTag("Player");
     }         
 
     // Update is called once per frame
     void Update () {
         if(ErrorManager.error > 2) {
             textGame.text = "Perdedor";
-            player_animator.Play("died");
+            player.GetComponent<Animator>().Play("died");
         }
-        else if(win) {
-            textGame.text = "Muy Bien!!!";
-            player_animator.Play("win");
-        }
+		else if(win) StartCoroutine("FinishScene"); 
     }
+
+	IEnumerator FinishScene() {
+		textGame.text = "Muy Bien!!!";
+		player.GetComponent<Animator>().Play("win");
+		yield return new WaitForSeconds(3);
+		SceneManager.LoadScene (nextSceneName);
+	}
 }
