@@ -264,6 +264,10 @@ Prefab:
       propertyPath: mAspectRatio
       value: 1.1650485
       objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 384a0d8cc71cef74a873b3353337ea2c, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 384a0d8cc71cef74a873b3353337ea2c, type: 2}
   m_IsPrefabParent: 0
@@ -283,7 +287,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 51156335}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 00c78e49ac18ecf4b94fb5bb0a7fd63d, type: 3}
+  m_Script: {fileID: 11500000, guid: 5b10b0ee37445bb4a9ed2305f1d9ced3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   knightAttr: {fileID: 1115198428}
@@ -815,7 +819,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 315192947}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 00c78e49ac18ecf4b94fb5bb0a7fd63d, type: 3}
+  m_Script: {fileID: 11500000, guid: 5b10b0ee37445bb4a9ed2305f1d9ced3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   knightAttr: {fileID: 2044964172}
@@ -2008,7 +2012,7 @@ Prefab:
     m_Modifications:
     - target: {fileID: 456938, guid: ec948f8e0c2ff154f8d8ab7b12efce49, type: 2}
       propertyPath: m_LocalPosition.x
-      value: -3.19
+      value: -2.74
       objectReference: {fileID: 0}
     - target: {fileID: 456938, guid: ec948f8e0c2ff154f8d8ab7b12efce49, type: 2}
       propertyPath: m_LocalPosition.y
@@ -2016,7 +2020,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 456938, guid: ec948f8e0c2ff154f8d8ab7b12efce49, type: 2}
       propertyPath: m_LocalPosition.z
-      value: -7.01
+      value: -5.74
       objectReference: {fileID: 0}
     - target: {fileID: 456938, guid: ec948f8e0c2ff154f8d8ab7b12efce49, type: 2}
       propertyPath: m_LocalRotation.x
@@ -2036,7 +2040,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 456938, guid: ec948f8e0c2ff154f8d8ab7b12efce49, type: 2}
       propertyPath: m_RootOrder
-      value: 4
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 456938, guid: ec948f8e0c2ff154f8d8ab7b12efce49, type: 2}
       propertyPath: m_LocalEulerAnglesHint.y
@@ -2279,7 +2283,11 @@ Prefab:
     - target: {fileID: 9500000, guid: d265bb418a3d9574aaa5e7500d619208, type: 3}
       propertyPath: m_Controller
       value: 
-      objectReference: {fileID: 9100000, guid: 195896d5a350a2947aec9709dd638dde, type: 2}
+      objectReference: {fileID: 9100000, guid: 9b4509d439e68d640ad805f27149f380, type: 2}
+    - target: {fileID: 100048, guid: d265bb418a3d9574aaa5e7500d619208, type: 3}
+      propertyPath: m_TagString
+      value: Dragon
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d265bb418a3d9574aaa5e7500d619208, type: 3}
   m_IsPrefabParent: 0
@@ -2375,7 +2383,7 @@ Material:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: cascoMaterial
+  m_Name: arcoMaterial
   m_Shader: {fileID: 10752, guid: 0000000000000000f000000000000000, type: 0}
   m_ShaderKeywords: 
   m_LightmapFlags: 5
@@ -4282,6 +4290,23 @@ Transform:
   m_Father: {fileID: 788669721}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1587610424 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 100000, guid: bf30d577eead1ef40bcf2b404289daf4, type: 2}
+  m_PrefabInternal: {fileID: 1509040314}
+--- !u!114 &1587610425
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1587610424}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 651ec85ab1222c54eb201483c2746b5d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  win: 0
+  textGame: {fileID: 421439621}
 --- !u!1 &1599494665
 GameObject:
   m_ObjectHideFlags: 0
@@ -5322,15 +5347,15 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 384a0d8cc71cef74a873b3353337ea2c, type: 2}
       propertyPath: m_LocalScale.x
-      value: 6.174199
+      value: 5.550295
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 384a0d8cc71cef74a873b3353337ea2c, type: 2}
       propertyPath: m_LocalScale.y
-      value: 6.174199
+      value: 5.550295
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 384a0d8cc71cef74a873b3353337ea2c, type: 2}
       propertyPath: m_LocalScale.z
-      value: 6.174199
+      value: 5.550295
       objectReference: {fileID: 0}
     - target: {fileID: 11400000, guid: 384a0d8cc71cef74a873b3353337ea2c, type: 2}
       propertyPath: mTrackableName
@@ -5342,11 +5367,11 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 11400000, guid: 384a0d8cc71cef74a873b3353337ea2c, type: 2}
       propertyPath: mWidth
-      value: 6.174199
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 11400000, guid: 384a0d8cc71cef74a873b3353337ea2c, type: 2}
       propertyPath: mHeight
-      value: 6.1218753
+      value: 11.898305
       objectReference: {fileID: 0}
     - target: {fileID: 11400000, guid: 384a0d8cc71cef74a873b3353337ea2c, type: 2}
       propertyPath: mAspectRatio
@@ -5371,11 +5396,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 1892537185}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 00c78e49ac18ecf4b94fb5bb0a7fd63d, type: 3}
+  m_Script: {fileID: 11500000, guid: 5b10b0ee37445bb4a9ed2305f1d9ced3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   knightAttr: {fileID: 452916367}
-  isSol: 1
+  isSol: 0
 --- !u!1 &1906387188
 GameObject:
   m_ObjectHideFlags: 0
@@ -5547,7 +5572,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1926154394}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 00c78e49ac18ecf4b94fb5bb0a7fd63d, type: 3}
+  m_Script: {fileID: 11500000, guid: 5b10b0ee37445bb4a9ed2305f1d9ced3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   knightAttr: {fileID: 1756496470}
@@ -6326,7 +6351,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 2106101058}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 00c78e49ac18ecf4b94fb5bb0a7fd63d, type: 3}
+  m_Script: {fileID: 11500000, guid: 5b10b0ee37445bb4a9ed2305f1d9ced3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   knightAttr: {fileID: 627941005}
