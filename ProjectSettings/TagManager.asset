@@ -4,11 +4,7 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - escudo
-  - espada
-  - arco
-  - casco
-  - hacha
+  - attrs
   layers:
   - Default
   - TransparentFX
