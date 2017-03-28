@@ -8,15 +8,24 @@ using System.Linq;
 public class FinalLevelController: MonoBehaviour {
 	public static FinalLevelController Instance { get; private set; }
 
+	//TEXT
 	public Text textGame;
+	public Text textHint;
+	//OTROS
 	public string[] badTargetNames;
 	public bool gameOver = false;
 	public GameObject canvasBtn;
+	//AUDIO
+	public AudioClip audioCrowd;
+	public AudioClip audioSword;
+	private AudioSource audioSource = null;
+
 	private GameObject player;
 	private GameObject dragon;
 
 	void Awake() {
 		textGame.text = "";
+		textHint.text = "";
 
 		if (null == Instance) Instance = this;
 		else {
@@ -28,6 +37,7 @@ public class FinalLevelController: MonoBehaviour {
 		player = GameObject.FindWithTag("Player");
 		dragon = GameObject.FindWithTag("Dragon");
 		canvasBtn.SetActive (false);
+		StartCoroutine ("StartHint");
 	}         
 
 	// Update is called once per frame
@@ -78,7 +88,13 @@ public class FinalLevelController: MonoBehaviour {
 		yield return new WaitForSeconds(3);
 		GameOver();
 	}
-		
+
+	IEnumerator StartHint() {
+		textHint.text = "NIVEL 3:\nDebo estar preparado para esta pelea.";
+		yield return new WaitForSeconds(5);
+		textHint.text = "";
+	}
+
 	void GameOver() {
 		gameOver = true;
 		canvasBtn.SetActive (true);

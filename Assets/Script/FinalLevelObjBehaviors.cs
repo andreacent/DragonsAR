@@ -17,14 +17,17 @@ public class FinalLevelObjBehaviors : MonoBehaviour,ITrackableEventHandler {
 
 	public void OnTrackableStateChanged(TrackableBehaviour.Status previousStatus,
 										TrackableBehaviour.Status newStatus){
-		if (null == FinalLevelController.Instance)  return;
-		if (FinalLevelController.Instance.gameOver)  return;
+		if (null == DragonsController.Instance || null == StageController.Instance)  return;
+		if (DragonsController.Instance.gameOver || StageController.Instance.gamePause) {
+			if(!isSol) knightAttr.SetActive(false);
+			return;
+		}
 
 		if (newStatus == TrackableBehaviour.Status.DETECTED ||
 			newStatus == TrackableBehaviour.Status.TRACKED ||
 			newStatus == TrackableBehaviour.Status.EXTENDED_TRACKED){
 			knightAttr.SetActive(true);
-			if(!isSol) StartCoroutine("DesactiveAttr");
+			if(!isSol) ErrorManager.error++;
 		}
 		else knightAttr.SetActive(false);
 	}   
@@ -35,6 +38,3 @@ public class FinalLevelObjBehaviors : MonoBehaviour,ITrackableEventHandler {
 		knightAttr.SetActive(false);
 	}
 }
-
-
-

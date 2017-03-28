@@ -18,8 +18,11 @@ public class ObjectBehaviors : MonoBehaviour,ITrackableEventHandler {
     public void OnTrackableStateChanged(TrackableBehaviour.Status previousStatus,
                                         TrackableBehaviour.Status newStatus){
 
-		if (null == DragonsController.Instance)  return;
-		if (DragonsController.Instance.gameOver)  return;
+		if (null == DragonsController.Instance || null == StageController.Instance)  return;
+		if (DragonsController.Instance.gameOver || StageController.Instance.gamePause) {
+			if(!isSol) knightAttr.SetActive(false);
+			return;
+		}
 
         if (newStatus == TrackableBehaviour.Status.DETECTED ||
             newStatus == TrackableBehaviour.Status.TRACKED ||
@@ -27,7 +30,7 @@ public class ObjectBehaviors : MonoBehaviour,ITrackableEventHandler {
             knightAttr.SetActive(true);
             
             if(isSol) DragonsController.Instance.win = true;
-            else StartCoroutine("DesactiveAttr"); 
+			else ErrorManager.error++;
         }
         else knightAttr.SetActive(false);
     }   

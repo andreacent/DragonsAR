@@ -6,6 +6,7 @@ TagManager:
   tags:
   - attrs
   - Dragon
+  - Bat
   layers:
   - Default
   - TransparentFX
