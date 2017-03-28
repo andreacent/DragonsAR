@@ -6,13 +6,18 @@ using Vuforia;
 public class StageController: MonoBehaviour,ITrackableEventHandler {
 	public static StageController Instance { get; private set; }
 
-	public bool gamePause;
+	public bool gamePause = true;
 
 	private AudioSource audio = null;
 	private TrackableBehaviour mTrackableBehaviour;
 
 	void Awake(){
 		audio = GetComponent<AudioSource>();
+		if (null == Instance) Instance = this;
+		else {
+			Debug.LogError("StageController::Awake - Instance already set. Is there more than one in scene?");
+		}
+
 	}
 
 	void Start(){
@@ -28,10 +33,10 @@ public class StageController: MonoBehaviour,ITrackableEventHandler {
 		if (newStatus == TrackableBehaviour.Status.DETECTED ||
 		    newStatus == TrackableBehaviour.Status.TRACKED ||
 		    newStatus == TrackableBehaviour.Status.EXTENDED_TRACKED) {
-			gamePause = true;
+			gamePause = false;
 			audio.Play ();
 		} else if (gamePause) {
-			gamePause = false;
+			gamePause = true;
 			audio.Pause();
 		}
 	}   
