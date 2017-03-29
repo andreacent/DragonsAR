@@ -36,11 +36,8 @@ public class DragonsController : MonoBehaviour {
     void Update () {
 		if (gameOver) return;
 
-		if (ErrorManager.error > 2) {
-			textGame.text = "Perdiste!";
-			player.GetComponent<Animator> ().Play ("died");
-			StartCoroutine ("GameOverBtn");
-		} else if (win) StartCoroutine ("FinishLevel1");
+		if (ErrorManager.error > 2) StartCoroutine ("GameOver");
+		else if (win) StartCoroutine ("FinishLevel");
     }
 
 	IEnumerator StartHint() {
@@ -58,15 +55,19 @@ public class DragonsController : MonoBehaviour {
 		textHint.text = "";
 	}
 
-	IEnumerator FinishLevel1() {
+	IEnumerator FinishLevel() {
 		textGame.text = "Muy Bien!!!";
 		player.GetComponent<Animator>().Play("AttackWin");
 		yield return new WaitForSeconds(3);
-		SceneManager.LoadScene ("Level"+level);
+		SceneManager.LoadScene ("Level"+(level+1));
 	}
 
-	IEnumerator GameOverBtn() {
+	IEnumerator GameOver() {
 		gameOver = true;
+		textGame.text = "Perdiste!";
+		player.GetComponent<Animator> ().Play ("died");
+		if (null != StageController.Instance) 
+			StageController.Instance.setAudioLose();
 		yield return new WaitForSeconds(3);
 		canvasBtn.SetActive (true);
 	}

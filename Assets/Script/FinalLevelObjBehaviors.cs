@@ -17,8 +17,9 @@ public class FinalLevelObjBehaviors : MonoBehaviour,ITrackableEventHandler {
 
 	public void OnTrackableStateChanged(TrackableBehaviour.Status previousStatus,
 										TrackableBehaviour.Status newStatus){
-		if (null == DragonsController.Instance || null == StageController.Instance)  return;
-		if (DragonsController.Instance.gameOver || StageController.Instance.gamePause) {
+
+		if (null == FinalLevelController.Instance || null == StageController.Instance)  return;
+		if (FinalLevelController.Instance.gameOver || StageController.Instance.gamePause) {
 			if(!isSol) knightAttr.SetActive(false);
 			return;
 		}

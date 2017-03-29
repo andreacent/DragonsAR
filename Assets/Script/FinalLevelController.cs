@@ -15,10 +15,6 @@ public class FinalLevelController: MonoBehaviour {
 	public string[] badTargetNames;
 	public bool gameOver = false;
 	public GameObject canvasBtn;
-	//AUDIO
-	public AudioClip audioCrowd;
-	public AudioClip audioSword;
-	private AudioSource audioSource = null;
 
 	private GameObject player;
 	private GameObject dragon;
@@ -48,9 +44,7 @@ public class FinalLevelController: MonoBehaviour {
 		else {
 			// Get the Vuforia StateManager
 			StateManager sm = TrackerManager.Instance.GetStateManager ();
-			// Query the StateManager to retrieve the list of
-			// currently 'active' trackables 
-			//(i.e. the ones currently being tracked by Vuforia)
+			// Query the StateManager to retrieve the list of currently 'active' trackables 
 			IEnumerable<TrackableBehaviour> activeTrackables = sm.GetActiveTrackableBehaviours ();
 
 			// Iterate through the list of active trackables
@@ -70,33 +64,40 @@ public class FinalLevelController: MonoBehaviour {
 	}
 
 	IEnumerator WinScene() {
+		gameOver = true;
 		textGame.text = "Ganaste!!";
+		//player attack
 		player.GetComponent<Animator>().Play("Taunt");
+
+		if (null != StageController.Instance) 
+			StageController.Instance.setAudioWin();
+		
 		yield return new WaitForSeconds(2);
+		//dragon die
 		dragon.GetComponent<Animator>().Play("dead");
 		yield return new WaitForSeconds(1);
 		player.GetComponent<Animator>().Play("win");
-		yield return new WaitForSeconds(3);
-		GameOver();
+		yield return new WaitForSeconds(1);
+		canvasBtn.SetActive (true);
 	}
 
 	IEnumerator LoseSecene() {
+		gameOver = true;
 		textGame.text = "Perdiste!";
 		dragon.GetComponent<Animator>().Play("attack");
+
+		if (null != StageController.Instance) 
+			StageController.Instance.setAudioLose();
+		
 		yield return new WaitForSeconds(1);
 		player.GetComponent<Animator>().Play("died");
-		yield return new WaitForSeconds(3);
-		GameOver();
+		yield return new WaitForSeconds(1);
+		canvasBtn.SetActive (true);
 	}
 
 	IEnumerator StartHint() {
 		textHint.text = "NIVEL 3:\nDebo estar preparado para esta pelea.";
 		yield return new WaitForSeconds(5);
 		textHint.text = "";
-	}
-
-	void GameOver() {
-		gameOver = true;
-		canvasBtn.SetActive (true);
 	}
 }
