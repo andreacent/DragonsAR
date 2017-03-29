@@ -97,7 +97,7 @@ public class FinalLevelController: MonoBehaviour {
 
 	IEnumerator StartHint() {
 		textHint.text = "NIVEL 3:\nDebo estar preparado para esta pelea.";
-		yield return new WaitForSeconds(5);
+		yield return new WaitForSeconds(7);
 		textHint.text = "";
 	}
 }

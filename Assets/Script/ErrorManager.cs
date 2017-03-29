@@ -17,6 +17,6 @@ public class ErrorManager : MonoBehaviour{
 
     void Update (){
         // Set the displayed text to be the word "error" followed by the error value.
-        textError.text = "ERRORES: " + error;
+        textError.text = "FALLOS: " + error;
     }
 }
